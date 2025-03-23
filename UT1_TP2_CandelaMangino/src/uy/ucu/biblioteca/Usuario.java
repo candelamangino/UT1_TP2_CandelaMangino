@@ -4,7 +4,7 @@ public class Usuario {
 	private String nombre;
 	private String apellido;
 	private int cedula;
-	//tengo que ajustar la lista para que tenga los libros que tiene el usuario 
+	//tengo que ajustar la lis ta para que tenga los libros que tiene el usuario 
 	private ArrayList<Prestamos> librosPrestados;
 	
 	public Usuario(String nombre, String apellido, int cedula ) {
