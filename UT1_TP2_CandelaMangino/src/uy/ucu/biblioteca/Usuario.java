@@ -1,5 +1,7 @@
 package uy.ucu.biblioteca;
 
+import java.util.ArrayList;
+
 public class Usuario {
 	private String nombre;
 	private String apellido;
@@ -32,7 +34,7 @@ public class Usuario {
 	public void setCedula(int cedula) {
 		this.cedula= cedula;
 	}
-	public ArratList<Prestamos> getLibrosPrestados(){
+	public ArrayList<Prestamos> getLibrosPrestados(){
 		return librosPrestados;
 	}
 	public void setLibrosPrestados(ArrayList<Prestamos> librosPrestados) {
