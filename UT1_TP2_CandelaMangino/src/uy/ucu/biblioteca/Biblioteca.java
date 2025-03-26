@@ -26,38 +26,44 @@ public class Biblioteca {
 	}
 	
 	//metodo que primero verifica si el usuario esta habilitado a pedir prestado un libro (si ya tiene 3 libros no podra) y luego, si efectivamente es apto se agrega ese libro a la lista de libros que tiene el usuario y se quita de la lista de libros disponibles de la biblioteca
-	public boolean prestarLibro(String tituloBuscado, Usuario usuario) {
+	public boolean prestarLibro(Usuario usuario, String tituloLibro) {
 		
 		for(Libro item : librosDisponibles) {
-			if (item.getTitulo().equalsIgnoreCase(tituloBuscado) && item.isDisponible()) {
-				System.out.println("¡Libro encontrado!");
-				if (usuario.puedePedirPrestamo()) {
-					usuario.agregarLibroPrestado(item);;
-					item.setDisponibile(false);;
-					System.out.println("el prestamo de "+ titulo+ "se realizo con exito a " + usuario.getNombre()+" "+ usuario.getApellido());
-					return true;
+			if (item.getTitulo().equalsIgnoreCase(tituloLibro)) {
+				
+				if (item.isDisponible()) {
+					if (usuario.puedePedirPrestamo()) {
+						usuario.agregarLibroPrestado(item);;
+						item.setDisponible(false);
+						System.out.println("el prestamo de "+ tituloLibro+ " se realizo con exito a " + usuario.getNombre()+" "+ usuario.getApellido());
+						return true;
+					} else {
+						System.out.println(usuario.getNombre() + usuario.getApellido() +" no puede solicitar mas libros porque ya tiene 3 libros prestados.");
+						return false;
+					}
 				} else {
-					System.out.println(usuario.getNombre() + usuario.getApellido() +" no puede solicitar mas libros porque ya tiene 3 libros prestados.");
+					System.out.println("el libro "+ tituloLibro+" NO esta disponible para prestamo");
 					return false;
 				}
+				
 				
 			}
 		
 		}
-		System.out.println("el libro "+titulo+" NO esta disponible para prestamo");
-		return false;
 		
+		System.out.println("el libro no existe en la biblioteca ");
+		return false;
 		
 	}
 	//metodo para devolver libros ( van de la lista de libros del usuario y vuelven a la lista de libros disponibles de la biblioteca )
 	public void devolverLibro(Libro item, Usuario usuario) {
 		if (usuario.getLibrosPrestados().contains(item)) {
-		usuario.devolverLibro(item);
-        item.setDisponibile(true);
+		usuario.removerLibroPrestado(item);
+        item.setDisponible(true);
         System.out.println("se ha devuelto exitosamente el libro a la biblioteca");
         
 		}else {
-    	System.out.println("el usuario no tiene ese libro")
+    	 System.out.println("el usuario no tiene ese libro");
     	}
     }
 

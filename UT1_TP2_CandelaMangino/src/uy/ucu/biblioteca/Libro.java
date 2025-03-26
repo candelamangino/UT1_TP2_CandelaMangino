@@ -44,7 +44,7 @@ public class Libro {
 		return disponibilidad;
 	}
 
-	public void setDisponibile(boolean disponibilidad) {
+	public void setDisponible(boolean disponibilidad) {
 		this.disponibilidad = disponibilidad;
 	}
 	
