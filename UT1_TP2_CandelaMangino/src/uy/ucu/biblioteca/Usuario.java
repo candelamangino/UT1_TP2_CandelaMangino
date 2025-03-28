@@ -8,7 +8,7 @@ public class Usuario {
 	private String nombre;
 	private String apellido;
 	private String cedula;
-	//tengo que ajustar la lis ta para que tenga los libros que tiene el usuario 
+	//tengo que ajustar la lista para que tenga los libros que tiene el usuario 
 	private List<Libro> librosPrestados;
 	
 	//constructor

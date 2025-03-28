@@ -1,15 +1,20 @@
 package uy.ucu.biblioteca;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Biblioteca {
 	//atributos
 	private List<Libro> librosDisponibles; //es <libro> pq lo que va dentro de la lista son libros
+	private List<Prestamo> prestamos; //lista para lograr registrar y mostrar las fechas de clase prestamo
+	
 	
 	//constructor
 	public Biblioteca() {
 		this.librosDisponibles= new ArrayList<>();
+		this.prestamos = new ArrayList<>();
+
 	}
 	
 	//getters y setters
@@ -19,6 +24,11 @@ public class Biblioteca {
 	public void setlibrosDisponibles(List<Libro> librosDisponibles) {
 		this.librosDisponibles=librosDisponibles;
 	}
+	
+	public List<Prestamo> getPrestamos() {
+	    return prestamos;
+	}
+
 	
 	//metodo para agregar un libro a la biblioteca por ende a la lista de libros
 	public void agregarLibro(Libro item) {
@@ -33,9 +43,11 @@ public class Biblioteca {
 				
 				if (item.isDisponible()) {
 					if (usuario.puedePedirPrestamo()) {
-						usuario.agregarLibroPrestado(item);;
+						usuario.agregarLibroPrestado(item);
 						item.setDisponible(false);
 						System.out.println("el prestamo de "+ tituloLibro+ " se realizo con exito a " + usuario.getNombre()+" "+ usuario.getApellido());
+						Prestamo prestamo = new Prestamo(item, usuario, LocalDate.now(), LocalDate.now().plusWeeks(2));
+						prestamos.add(prestamo);
 						return true;
 					} else {
 						System.out.println(usuario.getNombre() + usuario.getApellido() +" no puede solicitar mas libros porque ya tiene 3 libros prestados.");
@@ -66,6 +78,20 @@ public class Biblioteca {
     	 System.out.println("el usuario no tiene ese libro");
     	}
     }
+	
+	//metodo para mostrar la info de los prestamos
+	public void mostrarPrestamos() {
+	    System.out.println("\nPréstamos realizados:");
+
+	    for (int i = 0; i < prestamos.size(); i++) {
+	        Prestamo p = prestamos.get(i);
+	        System.out.println(p.getUsuario().getNombre() + " tiene prestado \"" + p.getLibro().getTitulo() + "\"");
+	        System.out.println("→ Fecha del préstamo = " + p.getFechaPrestamo());
+	        System.out.println("→ Fecha de devolución = " + p.getFechaDevolucion());
+	        System.out.println();
+	    }
+	}
+
 
 	
 }

@@ -1,5 +1,7 @@
 package uy.ucu.biblioteca;
 
+
+
 public class Main {
     public static void main(String[] args) {
         // Crear biblioteca
@@ -16,7 +18,8 @@ public class Main {
         biblioteca.agregarLibro(libro3);
 
         // Crear usuario
-        Usuario usuario = new Usuario("Candela", "Mangino", "12345678");
+        Usuario usuario = new Usuario("Candela", "Mangino", "55031694");
+        
 
         // Pedir préstamo de libros
         biblioteca.prestarLibro(usuario, "1984"); // debería prestarse
@@ -36,5 +39,8 @@ public class Main {
 
         // Intentar devolver un libro que no tiene
         biblioteca.devolverLibro(libro2, usuario); // ya lo devolvió, así que debería fallar
+        biblioteca.mostrarPrestamos();
+        
+    
     }
 }
